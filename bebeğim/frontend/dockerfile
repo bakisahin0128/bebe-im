@@ -1,0 +1,19 @@
+# Frontend için Dockerfile
+
+# Python 3.9 kullanıyoruz
+FROM python:3.9-slim
+
+# Çalışma dizinini oluştur
+WORKDIR /app
+
+# Gereksinim dosyasını çalışma dizinine kopyala
+COPY requirements.txt .
+
+# Gereksinimleri kur
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Tüm uygulama dosyalarını çalışma dizinine kopyala
+COPY . .
+
+# Streamlit sunucusunu başlatmak için komut
+CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS=false"]
